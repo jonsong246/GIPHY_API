@@ -1,0 +1,19 @@
+#animal-form{
+    background-color: rgb(213, 230, 241);
+    border: 2px solid black;
+    margin-top: 2px;
+    }
+
+body{
+    background-color: rgb(240, 240, 240);
+}
+
+.whitebg {
+    background-color: white;
+    border: 1px solid lightgray;
+ }
+ 
+ .graybg {
+    background-color: #f6f6f6;
+    border: 1px solid lightgray;
+ }
