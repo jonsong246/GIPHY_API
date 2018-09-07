@@ -21,22 +21,18 @@ function searchAPI(){
         url:url,
         method: 'GET',
     }).done(function(results){
-        console.log(results);
-        let arr = results.data.data
+        console.log(results.data);
+        let arr = results.data
 
-        for (i = 0; i < num; i++) {
-            if(i % 2 === 0) {
-                $('#content').append(`                
-                    <img src = ${arr[i].images.original.url}/><h5>${arr[i].rating}</h5>
-                `)
-            } else {
-                $('#content').append(`                
-                        <img src = ${arr[i].images.original.url}/><h5>${arr[i].rating}</h5>
-                    </div>    
-                `)
-            }
-            console.log(arr[i].data.data)
-        }
+        for (i = 0; i < 11; i++) {
+                $('#content').append(` 
+                <div class="card col-md-4">               
+                    <img src = ${arr[i].images.fixed_width.url}>
+                    <br>
+                    <h5>${arr[i].rating}</h5>
+                </div>
+                `
+        )}
     }).fail(function(err) {
         throw err;
     });
