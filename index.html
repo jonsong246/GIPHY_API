@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-light bg-secondary justify-content-center shadow-sm">
@@ -20,7 +21,7 @@
 
     <form id="animal-form">
         <label for="animal-input"><b> Add an animal:  </b></label>
-        <input type="text" class="form-control" id="searchTerm" placeholder= "Type Keyword Here"> 
+        <input type="text" class="form-control mr-sm-2" id="searchTerm" placeholder= "Type Keyword Here"> 
         <button id="search" type="submit" class="btn btn-secondary"> Search</button>
         <button id="clear" type="button" class="btn btn-secondary"> Clear Result</button>
     </form>
@@ -28,9 +29,13 @@
     <div class="container mt-2 p-2">
         <div class="row p-3 background shadow-sm rounded">GIFS</div>
         <div id="content" class="row rounded shadow-sm"></div>
+        <div class="row align-items-center justify-content-center mt-4">
+            <button id ="viewMore" type="button" class="btn-outline-dark">View More</button>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="assets/javascript/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 </body>
 </html>
