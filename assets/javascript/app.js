@@ -1,40 +1,26 @@
-let url = "https://api.giphy.com/v1/gifs/search?"
-let apikey = "lMViRVIDibY6gDVxFOAzgp6LdbutMPUb"
-let num = ''
-
-function buildURL(){
-    let tempURL = url + `&api_key=${apikey}`
-    if(q.length > 0){
-        tempURL = tempURL + `&q=${q}`
-    }
-    console.log(`build url: ${tempURL}`)
-    return tempURL
-}
-
-function searchAPI(){
-    $('#content').empty()
-    var url = ``
-    pullAPIParameters()
-    url = buildURL()
-
+//GiphyAPI Query
+function giphy (searchString, page) {
+    let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=not61tTmcb9Tq8XHIjAzFEpeQM4sMd9t&q=" + searchString + "&offset=" + page  + "&lang=en";
     $.ajax({
-        url:url,
+        url:queryURL,
         method: 'GET',
     }).done(function(results){
         console.log(results.data);
         let arr = results.data
+        console.log(arr[0].images.original_still.url)
 
-        for (i = 0; i < 11; i++) {
+        for (let i = 0; i < 11; i++) {
+            title = arr[i].title.split(" GIF")
                 $('#content').append(` 
                 <div class="card col-md-4">               
-                    <img class="giphyimg" data-image="${a[i].images.fixed_height_still.url}" data-gif="${a[i].images.fixed_height_url}" src = ${arr[i].images.fixed_height_still.url}" alt="Card Image">
+                    <img class="giphyimg" data-image="${arr[i].images.fixed_height_still.url}" data-gif="${arr[i].images.fixed_height.url}" src = "${arr[i].images.fixed_height_still.url}" alt="Card Image">
                     <br>
                     <div class="row card-body">
                         <div class="tags col-sm-10">
-                        <p class="card-text title">Title: ${title[0].charAt(0).toUppercase() + title[0].slice(1)}
+                        <p class="card-text title">Title: ${title[0].charAt(0).toUpperCase() + title[0].slice(1)}
                         </p>
 
-                    <p class="card-text rating">Rating: ${a[i].rating.toUpperCase()}</p>
+                    <p class="card-text rating">Rating: ${arr[i].rating.toUpperCase()}</p>
                     </div>
                     <div class="col-sm-1 addFav">
                     <button type="button" data-toggle="tooltip"
@@ -51,6 +37,7 @@ function searchAPI(){
     }).fail(function(err) {
         throw err;
     });
+}
 
 
 let page = 0;
@@ -71,22 +58,22 @@ $(function() {
     
     //Search and add
 
-    $('#search').on('click', function(){
+    $('#searchAdd').on('click', function(){
 
     
         // get form data
         event.preventDefault();
-        let searchVal = $.trim($('#searchTerm').val())
+        let searchVal = $.trim($('#search').val())
         if (searchVal !== "") {
             $('#btn').append(`
-            <div class="gif col-sm-2 btn btn-secondary mr1 mt-1">
+            <div class="gif col-sm-2 btn btn-outline-light mr-1 mt-1">
             <div class="row align-items-center">
-            <div class="searchValue col-8">${searchVal}</div>
+            <div class="searchvalue col-8">${searchVal}</div>
             <div class="col-2 closebtn">&times;
             </div>
             </div>
             `)
-            $('#searchTerm').val("")
+            $('#search').val("")
             btnClick();
             closeBtn();
             
@@ -95,9 +82,9 @@ $(function() {
         searchAPI()
     })
 
-    //Buttofn Click Function
+    //Button Click Function
     function btnClick() {
-        $('.searchValue').on('click', function(){
+        $(document).on('click','.searchvalue', function(){
             $('#viewMore').show()
             $('#content').empty()
             searchString = $(this).text();
@@ -128,7 +115,7 @@ $(function() {
         let favObj = {
             imageLink: $(this).parent().siblings().attr('data-image'),
             gifLink: $(this).parent().siblings().attr('data-gif'),
-            title: $(this).parent().children('.tags').children('title').text(),
+            title: $(this).parent().children('.tags').children('.title').text(),
             rating: $(this).parent().children('.tags').children('.rating').text()
         }
         if(favArr.map(function(gif){
@@ -140,7 +127,7 @@ $(function() {
     })
 
     //Toggling GIF and Still Image
-    $(document).on('click', '.giphy', function(){
+    $(document).on('click', '.giphyimg', function(){
         let _gif = $(this).attr("data-gif")
         let _still = $(this).attr("data-image")
         if ($(this).attr("src") == _still ){
@@ -157,7 +144,7 @@ $(function() {
         favArr.forEach(gif => {
             $('#content').append(`
             <div id="gif" class="card col-sm-6 col-md-4 col-lg-3 mt-2">
-                <img class="giphy card-img-top" data-image="${gif.imageLink}" data-gif="${gif.gifLink}" src="${gif.imageLink}" alt="Card image">
+                <img class="giphyimg card-img-top" data-image="${gif.imageLink}" data-gif="${gif.gifLink}" src="${gif.imageLink}" alt="Card image">
                 <div class="row card-body">
                     <div class="tags col-sm-10">
                     <p class="card-text title">${gif.title}</p>
@@ -193,4 +180,4 @@ $(function() {
         $('#searchTerm').val('')
         $('#content').empty()
     })
-}
+
