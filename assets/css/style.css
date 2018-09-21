@@ -1,0 +1,37 @@
+.gif {
+    border: 4px solid black !important;
+    border-radius: 25px !important;
+}
+
+.giphyimg{
+    border: 3px solid black !important;
+}
+
+.card{
+    background-color: orange !important;
+    border: 4px solid black !important;
+    border-radius: 25px !important;
+}
+
+.closebtn {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: #000;
+}
+
+.searchvalue {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card {
+    width: 18rem;
+}
+
+body{
+    background-color: rgb(255, 121, 31) !important;
+}
